@@ -58,7 +58,7 @@ def buscaPub(query):
     credenciales = login()
     listaPubs = credenciales.ListFile({'q': query}).GetList()
     for f in listaPubs:
-        eliminar_permisos(f['id'])
+        eliminarPermisos(f['id'])
         fechayHora = datetime.now()
         fechayHoraFormateada = fechayHora.strftime("%d/%m/%Y %H:%M:%S")
         historico = (f['id'], fechayHoraFormateada)
@@ -73,7 +73,7 @@ def buscaPub(query):
 
 
 # 4 Pasar archivo a Privado
-def eliminar_permisos(id_drive):
+def eliminarPermisos(id_drive):
     drive = login()
     file1 = drive.CreateFile({'id': id_drive})
     permissions = file1.GetPermissions()
@@ -134,22 +134,21 @@ def recorreDrive(query):
         propiedadesArchivo = (idArchivo, titArchivo, extArchivo, propArchivo, visArchivo, modArchivo)
         propiedadesArchivoUpdate = (titArchivo, extArchivo, propArchivo, visArchivo, modArchivo, idArchivo)
         archivoExistente = (idArchivo, titArchivo)
-        if (buscaDB(idArchivo) is None):  # El archivo existe en la BD?
-            # Si es true Hay que hacer insert
+        if (buscaDB(idArchivo) is None):  # El archivo existe en la BD? Si es true Hay que hacer insert
             archivosParaInsert.append(propiedadesArchivo)
             archivosEnDrive.append(archivoExistente)
-        # si la fecha de mdificación es la misma, entonces no hay cambios
-        elif (modArchivo in buscaDB(idArchivo)):
+        
+        elif (modArchivo in buscaDB(idArchivo)):  # Si la fecha de modificación es la misma, entonces no hay cambios
             pass
             archivosEnDrive.append(archivoExistente)
-        else:  # si hay, hago el update
+        else:  # Si hay, hago el update
             updateDB(propiedadesArchivoUpdate)
             archivosEnDrive.append(archivoExistente)
-    # hacer el insert (si hay datos)
+    # Hacer el insert (si hay datos)
     if(archivosParaInsert != []):
         insertDB(archivosParaInsert)
-    # delete
-    borrarArchivos(archivosEnDrive)
+    # Comparar archivs de Drive vs Base de Datos, para eliminar los que no existan más
+    borrarArchivosDB(archivosEnDrive)
 
 
 # 8 BUSCAR ARCHIVO EN LA BD
@@ -179,7 +178,7 @@ def updateDB(x):
 
 
 # 11 Borrar archivos inexistentes de la BD
-def borrarArchivos(x):
+def borrarArchivosDB(x):
     miCursor.execute('''CREATE TABLE TABLA_PUENTE
     (ID INTEGER PRIMARY KEY AUTOINCREMENT,
     FILE_ID VARCHAR(50),
