@@ -23,4 +23,4 @@ Contraseña: Challenge2021
 
 Una vez realizado el logon se habrán guardado las credenciales.
 
-Por último, ejecutar el archivo "ChallengeMeLi.py". Allí se ejecutará lo requerido para el Challenge.
+Por último, ejecutar el archivo "ChallengeMeLi.py". Allí se ejecutará lo requerido para el Challenge (el enunciado del Challenge puede ser consulltado en el archivo "Challenge MeLi - Docs en Drive Públicos.pdf").
