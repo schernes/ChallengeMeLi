@@ -5,6 +5,7 @@ Primero, ejecutar el archivo "quickstart.py". Con este archivo se generarán las
 Se ha creado una cuenta de Google para ser utilizada como prueba. A continuación se detallan los datos de acceso:
 
 Usuario: challenge.meli.js@gmail.com
+
 Contraseña: Challenge2021
 
 
