@@ -1,16 +1,19 @@
-import base64
+# Import para base de datos SQLite
 import sqlite3
 
+# Imports para conexión a Google Drive
 from pydrive2.auth import GoogleAuth
 from pydrive2.drive import GoogleDrive
 from datetime import datetime
 
+# Imports para conexión a GMAIL
+import base64
 from email.mime.multipart import MIMEMultipart
 from pydrive2.drive import GoogleDrive
 from email.mime.text import MIMEText
 
 
-# INICIAR SESION EN DRIVE
+# Verificar credenciales para Google Drive
 def login():
     directorio_credenciales = 'credentials_module.json'
     gauth = GoogleAuth()
@@ -29,21 +32,23 @@ conexionDB = sqlite3.connect("ChallengeMeLi.db3")
 
 miCursor = conexionDB.cursor()
 
-# 2 Crear las tablas
-try:
-    miCursor.execute('''CREATE TABLE FILES
-    (FILE_ID VARCHAR(50) PRIMARY KEY,
-    FILE_NAME VARCHAR(50),
-    FILE_EXTENSION VARCHAR(50),
-    OWNER VARCHAR(50),
-    VISIBILITY VARCHAR(50),
-    LAST_CHANGE_DATE VARCHAR(50))''')
-    miCursor.execute('''CREATE TABLE PUBLIC_FILES_HISTORY
-    (ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    FILE_ID VARCHAR(50),
-    CHANGE_TO_PRIVATE_DATE DATE)''')
-except:
-    pass
+# 2 Crear las tablas en la BD
+class CrearTablasBD:
+    try:
+        miCursor.execute('''CREATE TABLE FILES
+        (FILE_ID VARCHAR(50) PRIMARY KEY,
+        FILE_NAME VARCHAR(50),
+        FILE_EXTENSION VARCHAR(50),
+        OWNER VARCHAR(50),
+        VISIBILITY VARCHAR(50),
+        LAST_CHANGE_DATE VARCHAR(50))''')
+    
+        miCursor.execute('''CREATE TABLE PUBLIC_FILES_HISTORY
+        (ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        FILE_ID VARCHAR(50),
+        CHANGE_TO_PRIVATE_DATE DATE)''')
+    except:
+        pass
 
 
 # 3 Buscar archivos públicos
@@ -196,13 +201,11 @@ if __name__ == "__main__":
     buscaPub('''mimeType != "application/vnd.google-apps.folder"
     and trashed = false
     and "me" in owners
-    and title = "PruebaJS.txt"
     and visibility != "limited"''')
 
     recorreDrive('''mimeType != "application/vnd.google-apps.folder"
     and trashed = false
-    and "me" in owners
-    and title = "PruebaJS.txt"''')
+    and "me" in owners''')
 
 
 # Cerrar la BD
