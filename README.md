@@ -25,6 +25,7 @@ Para ver una demostración de la ejecución del Challenge, puede ingresar a este
 Una vez instaladas las dependencias, se debe ejecutar el archivo "**quickstart.py**". Con esta ejecución se abrirá una ventana emergente para validar las credenciales para acceder a Google Drive. Para ejecutar esta prueba, he creado una cuenta de Google. A continuación se detallan los datos de acceso:
 
    •	Usuario: **Challenge.MeLi.JS@gmail.com**
+   
    •	Contraseña: **Challenge2021**
 
 Luego del ingreso, las credenciales quedarán guardadas en el archivo **credentials_module.json**.
