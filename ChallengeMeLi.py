@@ -125,11 +125,8 @@ def recorreDrive(query):
             extArchivo = f['fileExtension']
         # Correo del propietario
         propArchivo = f['owners'][0]['emailAddress']
-        # Visibilidad
-        if (f['shared']):
-            visArchivo = 'Público'
-        else:
-            visArchivo = 'Privado'
+        # Visibilidad: Al haber mdificado los archivos públicos, sé que los archivos que analizo aqui son privados
+        visArchivo = 'Privado'
         # Fecha de ultima modificacion
         modArchivo = f['modifiedDate']
         propiedadesArchivo = (idArchivo, titArchivo, extArchivo, propArchivo, visArchivo, modArchivo)
