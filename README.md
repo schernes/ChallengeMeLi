@@ -1,6 +1,6 @@
 # ChallengeMeLi
 
-Prerrequisitos:
+## Prerrequisitos:
 
 Importar los siguientes archivos en un IDE (en mi caso he utilizado Visual Studio Code):
 
@@ -25,13 +25,10 @@ Previo realizar la ejecución, es necesario instalar las siguientes dependencias
 
       •	pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
-Se adjunta un link de una demostración de la ejecución del challenge paso a paso:
-
-      •	
 
 Para ver una demostración de la ejecución del Challenge, puede ingresar a este [Link](https://youtu.be/Wojm4nvdCFo) para ver el vide explicativo, en el cual se recorre paso a paso el código.
 
-Ejecutando el Código:
+## Ejecutando el Código:
 
 Una vez instaladas las dependencias, se debe ejecutar el archivo "quickstart.py". Con esta ejecución se abrirá una ventana emergente para validar las credenciales para acceder a Google Drive. Para ejecutar esta prueba, he creado una cuenta de Google. A continuación se detallan los datos de acceso:
 
