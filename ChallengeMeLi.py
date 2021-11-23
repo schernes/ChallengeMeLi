@@ -110,6 +110,7 @@ def sendMail(x, y):
 def recorreDrive(query):
     archivosParaInsert = []
     archivosEnDrive = []
+    ownerFile = []
     credenciales = login()
     archivos_drive = credenciales.ListFile({'q': query}).GetList()
     for f in archivos_drive:
@@ -148,7 +149,8 @@ def recorreDrive(query):
     if(archivosParaInsert != []):
         insertDB(archivosParaInsert)
     # Comparar archivs de Drive vs Base de Datos, para eliminar los que no existan más
-    borrarArchivosDB(archivosEnDrive)
+    ownerFile = [propArchivo]
+    borrarArchivosDB(archivosEnDrive,ownerFile)
 
 
 # 8 BUSCAR ARCHIVO EN LA BD
@@ -178,7 +180,7 @@ def updateDB(x):
 
 
 # 11 Borrar archivos inexistentes de la BD
-def borrarArchivosDB(x):
+def borrarArchivosDB(x,y):
     miCursor.execute('''CREATE TABLE TABLA_PUENTE
     (ID INTEGER PRIMARY KEY AUTOINCREMENT,
     FILE_ID VARCHAR(50),
@@ -188,10 +190,11 @@ def borrarArchivosDB(x):
     VALUES(NULL,?,?)''', x)
 
     miCursor.execute('''DELETE FROM FILES
-    WHERE (NOT EXISTS
+    WHERE  OWNER = ?
+    AND (NOT EXISTS
     (SELECT *
     FROM TABLA_PUENTE
-    WHERE FILES.FILE_ID = TABLA_PUENTE.FILE_ID))''')
+    WHERE FILES.FILE_ID = TABLA_PUENTE.FILE_ID))''', y)
 
     miCursor.execute('DROP TABLE TABLA_PUENTE')
 
