@@ -57,7 +57,7 @@ Luego se añadirá un registro en la tabla **PUBLIC_FILES_HISTORY** a través de
 
 Por último, y en caso de haber encontrado al menos un archivo que cumpla con estas condiciones realizará el envío de un correo electrónico notificando al usuario los archivos que han sido modificados, desde la función **sendMail**. En caso de haberse cumplido esta condición, será necesario autorizar el uso de Gmail por parte de la aplicación. Luego de ello se creará el archivo **token_gmail_v1.pickle**, el cual almacenará las credenciales para futuras ejecuciones.
 
-- En segunda instancia se ejecutará la función recorreDrive, la cual de forma similar a la anterior, recorrerá todos los archivos de Google Drive que cumplan con una serie de condiciones (esta segunda ejecución se debe a que, en la anterior se pudieron ver modificados algunos archivos y ahora será necesario actualizar la base de datos con los nuevos valores de cada archivo modificado):
+- En segunda instancia se ejecutará la función **recorreDrive**, la cual de forma similar a la anterior, recorrerá todos los archivos de Google Drive que cumplan con una serie de condiciones (esta segunda ejecución se debe a que, en la anterior se pudieron ver modificados algunos archivos y ahora será necesario actualizar la base de datos con los nuevos valores de cada archivo modificado):
 
       •	Que no sean carpetas.    
       •	Que no se encuentren en la papelera de reciclaje.   
